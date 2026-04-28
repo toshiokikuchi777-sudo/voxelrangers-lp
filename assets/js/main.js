@@ -23,7 +23,7 @@
   }
 
   // Reveal on scroll
-  const targets = document.querySelectorAll('.section-head, .about-copy, .about-visual, .service-card, .work, .other-item, .client, .company-table, .contact-inner');
+  const targets = document.querySelectorAll('.section-head, .about-copy, .about-visual, .service-card, .banner, .work, .other-item, .team-card, .partner, .client, .company-table, .contact-inner');
   targets.forEach(el => el.classList.add('reveal'));
 
   if ('IntersectionObserver' in window) {
