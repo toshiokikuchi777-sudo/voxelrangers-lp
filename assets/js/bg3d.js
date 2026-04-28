@@ -63,9 +63,9 @@ import * as THREE from 'https://unpkg.com/three@0.161.0/build/three.module.js';
     const mat = new THREE.MeshStandardMaterial({
       color: c.color,
       emissive: c.emissive,
-      emissiveIntensity: 0.35,
-      metalness: 0.35,
-      roughness: 0.55,
+      emissiveIntensity: 0.55,
+      metalness: 0.4,
+      roughness: 0.5,
       flatShading: true
     });
     const mesh = new THREE.Mesh(geom, mat);

@@ -263,7 +263,7 @@ a:hover { opacity: .85; }
 
 /* ============= ABOUT ============= */
 .section-about {
-  background: linear-gradient(180deg, var(--bg-0) 0%, var(--bg-1) 100%);
+  background: linear-gradient(180deg, rgba(7, 2, 26, 0.72) 0%, rgba(14, 5, 38, 0.72) 100%);
 }
 .about-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
@@ -301,7 +301,7 @@ a:hover { opacity: .85; }
 }
 
 /* ============= SERVICES (4 BANNERS) ============= */
-.section-services { background: var(--bg-1); }
+.section-services { background: rgba(14, 5, 38, 0.72); }
 .banners {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -407,7 +407,7 @@ a:hover { opacity: .85; }
 
 /* ============= WORKS ============= */
 .section-works {
-  background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-0) 100%);
+  background: linear-gradient(180deg, rgba(14, 5, 38, 0.72) 0%, rgba(7, 2, 26, 0.72) 100%);
 }
 .works-list { display: flex; flex-direction: column; gap: 100px; }
 .work {
@@ -580,7 +580,7 @@ a:hover { opacity: .85; }
 /* ============= CREATIVE TEAM ============= */
 .section-team {
   position: relative;
-  background: linear-gradient(180deg, var(--bg-0) 0%, #1a0210 50%, var(--bg-0) 100%);
+  background: linear-gradient(180deg, rgba(7, 2, 26, 0.7) 0%, rgba(26, 2, 16, 0.75) 50%, rgba(7, 2, 26, 0.7) 100%);
   overflow: hidden;
 }
 .team-bg {
@@ -635,7 +635,7 @@ a:hover { opacity: .85; }
 /* ============= PARTNERS ============= */
 .section-partners {
   position: relative;
-  background: var(--bg-0);
+  background: rgba(7, 2, 26, 0.7);
   overflow: hidden;
 }
 .section-partners::before {
@@ -682,7 +682,7 @@ a:hover { opacity: .85; }
 }
 
 /* ============= CLIENTS ============= */
-.section-clients { background: var(--bg-0); }
+.section-clients { background: rgba(7, 2, 26, 0.7); }
 .clients-grid {
   display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
   border: 1px solid var(--line);
@@ -706,7 +706,7 @@ a:hover { opacity: .85; }
 
 /* ============= COMPANY ============= */
 .section-company {
-  background: linear-gradient(180deg, var(--bg-0) 0%, var(--bg-1) 100%);
+  background: linear-gradient(180deg, rgba(7, 2, 26, 0.72) 0%, rgba(14, 5, 38, 0.72) 100%);
 }
 .company-grid {
   display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start;
@@ -753,7 +753,7 @@ a:hover { opacity: .85; }
 
 /* ============= FOOTER ============= */
 .site-footer {
-  background: var(--bg-0);
+  background: rgba(7, 2, 26, 0.78);
   border-top: 1px solid var(--line);
   padding: 60px 0 40px;
 }
