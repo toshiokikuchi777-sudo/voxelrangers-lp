@@ -42,7 +42,22 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  position: relative;
 }
+
+/* Background 3D canvas */
+#bg3d {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  display: block;
+}
+
+/* Layer all content above the canvas */
+.site-header, main, .site-footer { position: relative; z-index: 2; }
 
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-decoration: none; transition: color .2s ease, opacity .2s ease; }
@@ -109,9 +124,10 @@ a:hover { opacity: .85; }
   min-height: 100vh;
   padding: 140px 0 60px;
   overflow: hidden;
-  background: radial-gradient(ellipse at 80% 20%, rgba(157, 78, 221, 0.35) 0%, transparent 55%),
-              radial-gradient(ellipse at 10% 80%, rgba(255, 45, 203, 0.30) 0%, transparent 55%),
-              var(--bg-0);
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(157, 78, 221, 0.35) 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 80%, rgba(255, 45, 203, 0.30) 0%, transparent 55%),
+    rgba(7, 2, 26, 0.55);
 }
 .hero-bg-grid {
   position: absolute; inset: 0; pointer-events: none;
@@ -714,13 +730,13 @@ a:hover { opacity: .85; }
 
 /* ============= CONTACT ============= */
 .section-contact {
-  background: var(--bg-1);
+  background: rgba(14, 5, 38, 0.65);
   position: relative;
   overflow: hidden;
 }
 .section-contact::before {
   content: ""; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at center, rgba(255, 45, 203, 0.20) 0%, transparent 60%);
+  background: radial-gradient(ellipse at center, rgba(255, 45, 203, 0.22) 0%, transparent 60%);
   pointer-events: none;
 }
 .contact-inner { position: relative; text-align: center; max-width: 800px; margin: 0 auto; }
