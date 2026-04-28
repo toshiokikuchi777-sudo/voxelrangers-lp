@@ -346,6 +346,26 @@ a:hover { opacity: .85; }
 }
 .work:hover .work-img img { transform: scale(1.04); }
 
+/* Multi-image gallery */
+.work-media {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto;
+  gap: 12px;
+  position: relative;
+}
+.work-media .work-img.main { aspect-ratio: 16 / 10; }
+.work-media .work-img.sub {
+  aspect-ratio: 16 / 7;
+  margin-top: 0;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+}
+.work-media .work-img.sub::after {
+  content: ""; position: absolute; inset: 0;
+  pointer-events: none;
+}
+
 .work-body .work-tag {
   display: inline-block;
   font-family: var(--font-mono); font-size: 11px; letter-spacing: .22em; font-weight: 600;
@@ -380,25 +400,97 @@ a:hover { opacity: .85; }
   padding-top: 80px;
 }
 .other-title {
-  font-family: var(--font-head); font-size: 28px; font-weight: 600;
-  margin-bottom: 40px;
+  font-family: var(--font-head); font-size: 32px; font-weight: 600;
+  letter-spacing: -0.005em;
+  margin-bottom: 12px;
   text-align: center;
 }
+.other-sub {
+  text-align: center; color: var(--text-mute); font-size: 14px;
+  margin-bottom: 48px;
+}
 .other-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
 }
 .other-item {
-  display: flex; flex-direction: column; gap: 8px;
-  padding: 24px 22px;
+  position: relative;
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 0;
   background: var(--bg-card);
   border: 1px solid var(--line);
-  border-radius: 14px;
-  transition: border-color .25s, transform .25s;
+  border-radius: 16px;
+  transition: border-color .25s, transform .25s, box-shadow .25s;
+  overflow: hidden;
 }
-.other-item:hover { border-color: rgba(157, 78, 221, 0.5); transform: translateY(-2px); }
-.ow-platform { font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; color: var(--purple); }
-.other-item strong { font-family: var(--font-head); font-size: 17px; font-weight: 600; line-height: 1.4; }
-.ow-note { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+.other-item:hover {
+  border-color: rgba(255, 45, 203, 0.45);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(255, 45, 203, 0.10);
+}
+
+/* thumbnail header with gradient + voxel pattern */
+.ow-thumb {
+  position: relative;
+  height: 92px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+.ow-thumb::before {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 16px 16px;
+  opacity: 0.6;
+}
+.ow-thumb::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.18) 0%, transparent 60%);
+  mix-blend-mode: overlay;
+}
+.ow-icon {
+  position: relative; z-index: 1;
+  font-family: var(--font-head);
+  font-size: 36px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+  letter-spacing: 0.08em;
+}
+
+.ow-sandbox .ow-thumb {
+  background: linear-gradient(135deg, #FF2DCB 0%, #9D4EDD 60%, #5B2A86 100%);
+}
+.ow-roblox .ow-thumb {
+  background: linear-gradient(135deg, #00B3FF 0%, #36F0FF 50%, #1A6FA0 100%);
+}
+.ow-asset .ow-thumb {
+  background: linear-gradient(135deg, #FF6B35 0%, #FFB400 50%, #803C00 100%);
+}
+
+.other-item .ow-platform,
+.other-item strong,
+.other-item .ow-note {
+  padding-left: 22px; padding-right: 22px;
+}
+.other-item .ow-platform {
+  margin-top: 18px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; color: var(--magenta-soft);
+  font-weight: 600;
+}
+.ow-roblox .ow-platform { color: var(--cyan); }
+.ow-asset .ow-platform { color: #FFB400; }
+
+.other-item strong {
+  font-family: var(--font-head); font-size: 17px; font-weight: 700; line-height: 1.4;
+  letter-spacing: -0.005em;
+}
+.other-item .ow-note {
+  font-size: 12.5px; color: var(--text-dim); line-height: 1.7;
+  padding-bottom: 22px;
+  margin-top: 4px;
+}
 
 /* ============= CLIENTS ============= */
 .section-clients { background: var(--bg-0); }
