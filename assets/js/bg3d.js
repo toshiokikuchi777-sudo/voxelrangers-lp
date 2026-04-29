@@ -52,47 +52,72 @@ import * as THREE from 'https://unpkg.com/three@0.161.0/build/three.module.js';
   ];
 
   const cubes = [];
-  const COUNT = 14;
-
   const rand = (min, max) => Math.random() * (max - min) + min;
 
-  for (let i = 0; i < COUNT; i++) {
-    const size = rand(0.55, 1.4);
-    const geom = new THREE.BoxGeometry(size, size, size);
-    const c = palette[i % palette.length];
-    const mat = new THREE.MeshStandardMaterial({
-      color: c.color,
-      emissive: c.emissive,
-      emissiveIntensity: 0.55,
-      metalness: 0.4,
-      roughness: 0.5,
-      flatShading: true
-    });
-    const mesh = new THREE.Mesh(geom, mat);
+  // Three size tiers — small (far), medium (mid), large (close)
+  // Closer cubes have stronger parallax so depth feels natural.
+  const TIERS = [
+    // LARGE — foreground, bold
+    { count: 5, sizeMin: 2.2, sizeMax: 3.6, zMin: -2,  zMax: 5,
+      xMin: -16, xMax: 16, yMin: -10, yMax: 10,
+      rotMul: 1.0, parallax: [0.0030, 0.0048], edgeOpacity: 0.55, emissive: 0.7 },
+    // MEDIUM — mid plane
+    { count: 7, sizeMin: 0.85, sizeMax: 1.5, zMin: -7,  zMax: -1,
+      xMin: -14, xMax: 14, yMin: -9, yMax: 9,
+      rotMul: 1.4, parallax: [0.0014, 0.0028], edgeOpacity: 0.4, emissive: 0.5 },
+    // SMALL — background, dust-like
+    { count: 9, sizeMin: 0.22, sizeMax: 0.55, zMin: -14, zMax: -6,
+      xMin: -18, xMax: 18, yMin: -10, yMax: 10,
+      rotMul: 2.0, parallax: [0.0005, 0.0014], edgeOpacity: 0.25, emissive: 0.35 }
+  ];
 
-    // Random distribution in a wide horizontal band
-    mesh.position.set(rand(-12, 12), rand(-8, 8), rand(-10, 4));
-    mesh.rotation.set(rand(0, Math.PI), rand(0, Math.PI), rand(0, Math.PI));
-
-    // Subtle wireframe overlay for the voxel feel
-    const edges = new THREE.LineSegments(
-      new THREE.EdgesGeometry(geom),
-      new THREE.LineBasicMaterial({
+  let idx = 0;
+  for (const tier of TIERS) {
+    for (let i = 0; i < tier.count; i++) {
+      const size = rand(tier.sizeMin, tier.sizeMax);
+      const geom = new THREE.BoxGeometry(size, size, size);
+      const c = palette[idx % palette.length];
+      const mat = new THREE.MeshStandardMaterial({
         color: c.color,
-        transparent: true,
-        opacity: 0.35
-      })
-    );
-    mesh.add(edges);
+        emissive: c.emissive,
+        emissiveIntensity: tier.emissive,
+        metalness: 0.4,
+        roughness: 0.5,
+        flatShading: true
+      });
+      const mesh = new THREE.Mesh(geom, mat);
 
-    scene.add(mesh);
-    cubes.push({
-      mesh,
-      baseY: mesh.position.y,
-      rotSpeed: { x: rand(-0.003, 0.003), y: rand(-0.005, 0.005), z: rand(-0.002, 0.002) },
-      parallax: rand(0.0008, 0.0035),
-      drift: rand(0, Math.PI * 2)
-    });
+      mesh.position.set(
+        rand(tier.xMin, tier.xMax),
+        rand(tier.yMin, tier.yMax),
+        rand(tier.zMin, tier.zMax)
+      );
+      mesh.rotation.set(rand(0, Math.PI), rand(0, Math.PI), rand(0, Math.PI));
+
+      const edges = new THREE.LineSegments(
+        new THREE.EdgesGeometry(geom),
+        new THREE.LineBasicMaterial({
+          color: c.color,
+          transparent: true,
+          opacity: tier.edgeOpacity
+        })
+      );
+      mesh.add(edges);
+
+      scene.add(mesh);
+      cubes.push({
+        mesh,
+        baseY: mesh.position.y,
+        rotSpeed: {
+          x: rand(-0.003, 0.003) * tier.rotMul,
+          y: rand(-0.005, 0.005) * tier.rotMul,
+          z: rand(-0.002, 0.002) * tier.rotMul
+        },
+        parallax: rand(tier.parallax[0], tier.parallax[1]),
+        drift: rand(0, Math.PI * 2)
+      });
+      idx++;
+    }
   }
 
   // Scroll state
